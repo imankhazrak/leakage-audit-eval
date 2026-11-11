@@ -1,0 +1,16 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+View & AUROC & fam.\ $>0.5$ & dd exact & dd near & dd scope & dd proxy\\
+\midrule
+logistic regression (frozen) & 0.610 & 10/10 & 0.576 & 0.544 & 0.488 & 0.875\\
+gradient boosting & 0.653 & 9/10 & 0.826 & 0.592 & 0.484 & 0.864\\
+1-NN & 0.661 & 10/10 & 0.816 & 0.637 & 0.562 & 0.853\\
+S $+$ gradient boosting & 0.846 & 10/10 & & & & \\
+S $+$ 1-NN & 0.822 & 10/10 & & & & \\
+S (corrected) & 0.857 & 10/10 & & & & \\
+\midrule
+\multicolumn{3}{l}{\emph{Gain over the frozen behavioral view} (w/l; $p$)} & & & &\\
+\quad gradient boosting & \multicolumn{2}{l}{$+0.043$ (9/1; 0.010)} & & & &\\
+\quad 1-NN & \multicolumn{2}{l}{$+0.051$ (9/1; 0.006)} & & & &\\
+\bottomrule
+\end{tabular}

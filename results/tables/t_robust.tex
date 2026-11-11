@@ -1,0 +1,12 @@
+\begin{tabular}{lrll}
+\toprule
+Audited learner & behav.\ AUROC & S $-$ behav.\ (w/l; Holm $p$) & (S$+$behav.) $-$ S (w/l; Holm $p$)\\
+\midrule
+\multicolumn{4}{l}{\emph{Behavioral view with a stronger audited learner (1,260 Study-3 episodes)}}\\
+gradient boosting & 0.653 & $+0.205$ (10/0; 0.008) & $-0.011$ (5/5; 0.781)\\
+1-NN & 0.661 & $+0.196$ (10/0; 0.008) & $-0.035$ (2/8; 0.180)\\
+\midrule
+\multicolumn{4}{l}{\emph{Nine unseen recipes, detectors trained on the original arms (540 new episodes)}}\\
+logistic regression & 0.614 & $+0.197$ (10/0; 0.004) & $-0.013$ (4/6; 0.422)\\
+\bottomrule
+\end{tabular}

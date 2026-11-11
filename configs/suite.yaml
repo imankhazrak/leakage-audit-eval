@@ -1,0 +1,62 @@
+# Planted-leakage evaluation suite: composition as used in the paper.
+#
+# This file is a readable index of the suite. The authoritative definitions are
+# the frozen protocols and runners under research/ (see configs/README.md); the
+# test suite checks that this file agrees with the saved episode tables.
+
+suite:
+  task: binary classification, numeric predictors, complete rows
+  variants: [raw, dd]            # dd = duplicate feature rows removed (first kept)
+  seeds: [104729, 130363, 155921]
+  split:
+    evaluation_fraction: 0.25    # stratified
+    reserve_fraction_of_training: 0.10   # never fitted, never evaluated
+  unit_of_inference: source family (leave-one-family-out)
+
+families:
+  - {id: openml_1067, source: OpenML, dataset_id: 1067, version: 1, name: kc1,                  predictors: 21, rows: 2109,  rows_dedup: 1192,  class1_share: 0.15}
+  - {id: openml_1462, source: OpenML, dataset_id: 1462, version: 1, name: banknote,             predictors: 4,  rows: 1372,  rows_dedup: 1348,  class1_share: 0.44}
+  - {id: openml_1464, source: OpenML, dataset_id: 1464, version: 1, name: blood-transfusion,    predictors: 4,  rows: 748,   rows_dedup: 502,   class1_share: 0.76}
+  - {id: openml_1487, source: OpenML, dataset_id: 1487, version: 1, name: ozone-level,          predictors: 72, rows: 2534,  rows_dedup: 2526,  class1_share: 0.06}
+  - {id: openml_1489, source: OpenML, dataset_id: 1489, version: 1, name: phoneme,              predictors: 5,  rows: 5404,  rows_dedup: 5395,  class1_share: 0.29}
+  - {id: openml_1494, source: OpenML, dataset_id: 1494, version: 1, name: qsar-biodeg,          predictors: 41, rows: 1055,  rows_dedup: 1052,  class1_share: 0.34}
+  - {id: openml_44,   source: OpenML, dataset_id: 44,   version: 1, name: spambase,             predictors: 57, rows: 4601,  rows_dedup: 4207,  class1_share: 0.61}
+  - {id: uci_159,     source: UCI,    dataset_id: 159,  name: MAGIC gamma,                      predictors: 10, rows: 19020, rows_dedup: 18905, class1_share: 0.35}
+  - {id: uci_329,     source: UCI,    dataset_id: 329,  name: diabetic retinopathy,             predictors: 19, rows: 1151,  rows_dedup: 1146,  class1_share: 0.53}
+  - {id: uci_563,     source: UCI,    dataset_id: 563,  name: Iranian churn,                    predictors: 13, rows: 3150,  rows_dedup: 2836,  class1_share: 0.16}
+
+# Severity parameters are mechanism-specific and are not comparable across mechanisms.
+arms:
+  positive:
+    PE4:     {mechanism: exact copies (L1),  k: 4}
+    PE16:    {mechanism: exact copies (L1),  k: 16}
+    PE64:    {mechanism: exact copies (L1),  k: 64}
+    PJ16s01: {mechanism: near copies (L1),   k: 16, sigma_column_sd: 0.01}
+    PJ16s05: {mechanism: near copies (L1),   k: 16, sigma_column_sd: 0.05}
+    PJ16s20: {mechanism: near copies (L1),   k: 16, sigma_column_sd: 0.20}
+    PJ4s05:  {mechanism: near copies (L1),   k: 4,  sigma_column_sd: 0.05}
+    PJ64s05: {mechanism: near copies (L1),   k: 64, sigma_column_sd: 0.05}
+    PL4h:    {mechanism: preprocessing scope (L4), evaluation_fraction_in_scope: 0.5}
+    PL4f:    {mechanism: preprocessing scope (L4), evaluation_fraction_in_scope: 1.0}
+    PL5a80:  {mechanism: proxy (L5), univariate_auroc: 0.80}
+    PL5a95:  {mechanism: proxy (L5), univariate_auroc: 0.95}
+    PL5a995: {mechanism: proxy (L5), univariate_auroc: 0.995}
+  negative:
+    A:     {look_alike: clean}
+    NB16:  {look_alike: exact self-duplicates of 16 fit rows}
+    NJ16:  {look_alike: jittered self-duplicates of 16 fit rows, sigma_column_sd: 0.05}
+    NR16:  {look_alike: exact copies of 16 reserve rows}
+    NRJ16: {look_alike: jittered copies of 16 reserve rows, sigma_column_sd: 0.05}
+    NL4R:  {look_alike: scope of fit plus reserve rows}
+    NL5S:  {look_alike: noisy copy of the strongest predictor}
+    NL5N:  {look_alike: noise predictor}
+  # Scored only by a structural view refitted on all 23 arms; outside every 21-arm analysis.
+  matched_post_hoc:
+    PL5m: {role: positive, mechanism: proxy matched to the strongest predictor (L5)}
+    NL5X: {role: negative, look_alike: strongest predictor replaced by its noisy copy}
+
+studies:
+  study2: {cells: 420,  design: "10 families x 2 variants x 3 seeds x 7 arms (A, B1, B16, C1, C4, C16, C64)"}
+  study3: {episodes: 1260, positive: 780, negative: 480, arms: 21}
+  matched_arms: {episodes: 1380, arms: 23}
+  hidden_scope: {episodes_three_seeds: 240, episodes_ten_seeds: 800, variant: dd}

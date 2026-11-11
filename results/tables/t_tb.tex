@@ -1,0 +1,11 @@
+\begin{tabular}{lrrrrrrr}\toprule
+View (1,260 Study-3 episodes) & per-family AUROC & TPR & FPR & exact & near & L4 & L5\\\midrule
+Behavioral, frozen (8) & 0.610 & 0.11 & 0.09 & 0.12 & 0.10 & 0.10 & 0.11\\
+Targeted behavioral (12) & 0.642 & 0.28 & 0.13 & 0.21 & 0.15 & 0.17 & 0.62\\
+Structural, corrected (22) & 0.857 & 0.40 & 0.10 & 0.42 & 0.26 & 0.94 & 0.24\\
+Structural + targeted behavioral (34) & 0.841 & 0.48 & 0.13 & 0.49 & 0.28 & 0.79 & 0.60\\
+\midrule Paired (Holm over 3) & mean & 95\% $t$ interval & w/l & $p$ (Holm) &&&\\
+Structural+targeted $-$ structural & -0.016 & [-0.039, +0.007] & 3/7 & 0.158 (0.316) &&&\\
+Targeted $-$ frozen behavioral & +0.032 & [-0.016, +0.079] & 8/2 & 0.158 (0.316) &&&\\
+Structural $-$ targeted & +0.216 & [+0.150, +0.281] & 10/0 & 0.002 (0.006) &&&\\
+\bottomrule\end{tabular}

@@ -1,0 +1,14 @@
+\begin{tabular}{llrrr}\toprule
+Mechanism (dd) & Statistic & per-family AUROC & families $>0.5$ & $p$ vs.\ 0.5\\\midrule
+exact & $z$, I1, targeted rows & 0.911 & 10/10 & 0.002\\
+exact & $z$, I1, all rows & 0.589 & 6/10 & 0.254\\
+exact & $\Delta$, nearest-row removal, targeted & 0.595 & 5/10 & 0.311\\
+exact & $z$, nearest-row removal, targeted & 0.619 & 7/10 & 0.170\\
+L4 & $\Delta$, I4 & 0.510 & 6/10 & 0.879\\
+L4 & $z$, I4 & 0.508 & 6/10 & 0.936\\
+L5 & $\Delta$, I5 & 0.851 & 9/10 & 0.010\\
+L5 & $z$, I5 (drop top predictor) & 0.843 & 9/10 & 0.004\\
+near & $z$, I1, targeted rows & 0.500 & 0/10 & 1.000\\
+near & $\Delta$, nearest-row removal, targeted & 0.550 & 7/10 & 0.312\\
+near & $z$, nearest-row removal, targeted & 0.574 & 8/10 & 0.084\\
+\bottomrule\end{tabular}

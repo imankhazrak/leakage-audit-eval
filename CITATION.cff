@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software or the evaluation suite, please cite the paper below."
+type: software
+title: "LeakageLens: a planted-leakage evaluation suite and refit-based audit library for tabular pipelines"
+version: 0.1.0
+date-released: "2026-11-10"
+license: MIT
+# Author names and the repository URL are withheld while the paper is under
+# double-blind review. Replace the entries below after the review period.
+authors:
+  - name: "Anonymous authors"
+keywords:
+  - data leakage
+  - tabular data
+  - evaluation
+  - benchmark
+  - machine learning
+preferred-citation:
+  type: unpublished
+  title: "What Detects Tabular Data Leakage? A Controlled Evaluation of Structural, Declared-Scope and Refit-Based Audits"
+  authors:
+    - name: "Anonymous authors"
+  year: 2026
+  notes: "Under review, NeurIPS 2026 Evaluations & Datasets Track."

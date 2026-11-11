@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Source tables are downloaded, never committed (see data/README.md)
+data/raw/
+data/interim/
+research/stage5_2026-11-01/panel/data_v5/
+
+# Regenerated working copies and tool by-products
+*.parquet
+*.sif
+*.facts
+apptainer_cache/
+apptainer_tmp/
+
+# Scratch outputs of the helper scripts
+results/rebuilt/
+results/scratch/
+
+# Scheduler logs
+slurm-*.out
+*.err
+logs/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/

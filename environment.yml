@@ -1,0 +1,21 @@
+# Conda environment with the versions used for the reported results.
+#   conda env create --file environment.yml
+#   conda activate leakagelens && pip install -e ".[dev]"
+name: leakagelens
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - numpy=2.3.3
+  - pandas=2.5.3
+  - scipy=1.18.1
+  - scikit-learn=1.9.1
+  - matplotlib
+  - joblib
+  - pyyaml
+  - pyarrow=25.0.1
+  - pytest
+  - pip:
+      - lightgbm==4.7.0
+      - openml==0.15.1

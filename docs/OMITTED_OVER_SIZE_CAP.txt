@@ -1,0 +1,2 @@
+research/stage5_2026-11-01/panel/UCI_METADATA_SNAPSHOT.json	5718202
+research/stage8_2026-11-02/SHA256SUMS	5180040

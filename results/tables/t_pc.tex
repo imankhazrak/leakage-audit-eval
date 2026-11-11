@@ -1,0 +1,11 @@
+\begin{tabular}{lrrrr}\toprule
+Score (exact copies vs.\ negatives, deduplicated) & mean AUROC & 95\% $t$ & families $>0.5$ & sign-flip $p$\\\midrule
+Behavioral $B$, logistic regression & 0.533 & [0.29, 0.78] & 4/10 & 0.760\\
+Behavioral $B$, 1-nearest neighbor & 0.714 & [0.52, 0.91] & 7/10 & 0.037\\
+Behavioral $B$, gradient boosting & 0.704 & [0.47, 0.94] & 7/10 & 0.082\\
+Structural \texttt{exact\_eval} & 1.000 & --- & 10/10 & ---\\
+Structural $S_{nn}$ (same targeted rows) & 0.996 & --- & 10/10 & ---\\
+\midrule
+1-NN $-$ logistic regression (paired) & +0.180 & [-0.03, +0.39] & 8/2 w/l & 0.078\\
+boosting $-$ logistic regression (paired) & +0.170 & [-0.03, +0.37] & 7/3 w/l & 0.098\\
+\bottomrule\end{tabular}

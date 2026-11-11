@@ -1,0 +1,12 @@
+\begin{tabular}{lrrrrrrrr}\toprule
+View & feat. & per-fam. & pooled & TPR & FPR & dd & dd & dd exact\\
+ & & AUROC & & & & TPR & FPR & recall\\\midrule
+Structural, frozen & 22 & 0.857 & 0.792 & 0.42 & 0.10 & 0.42 & 0.08 & 0.44\\
+Structural, corrected & 22 & 0.857 & 0.800 & 0.40 & 0.10 & 0.41 & 0.08 & 0.44\\
+Combined, frozen & 30 & 0.837 & 0.771 & 0.40 & 0.10 & 0.41 & 0.08 & 0.40\\
+Combined, corrected & 30 & 0.840 & 0.773 & 0.40 & 0.09 & 0.41 & 0.07 & 0.40\\
+Data-only structural, frozen & 19 & 0.773 & 0.698 & 0.31 & 0.10 & 0.31 & 0.10 & 0.44\\
+Data-only structural, corrected & 19 & 0.775 & 0.700 & 0.31 & 0.10 & 0.31 & 0.10 & 0.44\\
+Structural, corrected, trained on dd only & 22 & 0.879 & 0.837 & 0.52 & 0.05 & 0.52 & 0.05 & 0.80\\
+Combined, corrected, trained on dd only & 30 & 0.874 & 0.794 & 0.57 & 0.13 & 0.57 & 0.13 & 0.73\\
+\bottomrule\end{tabular}

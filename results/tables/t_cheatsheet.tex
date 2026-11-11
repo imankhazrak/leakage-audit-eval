@@ -1,0 +1,14 @@
+\begin{tabular}{@{}p{1.7cm}p{1.9cm}p{5.4cm}p{4.1cm}@{}}
+\toprule
+Evidence & Reads & Statistic or edit (and its control) & Finds here / misses here\\
+\midrule
+Copy structure & values, partitions & \texttt{exact\_eval}: share of evaluation rows with an equal fit row; \texttt{excess\_t}: share within $t\cdot m$ minus the fit-row leave-one-out share & dd exact copies (1.00), many or lightly jittered near copies; not raw-table ancestry, weak on few or heavily jittered copies\\
+Association & values, labels (fit rows) & \texttt{assoc\_top}: largest $|2\,\mathrm{AUROC}_j-1|$, its gap and robust $z$ & proxies; strong legitimate predictors are its hard look-alikes\\
+Declared scope & scope row ids & \texttt{scope\_eval\_frac} $=|S\cap E|/|E|$, \texttt{scope\_excess} & L4 by construction; blind if the scope is not declared\\
+Code & program & Yang's static data-flow analysis & every planted L4 program; needs the code\\
+Frozen refit & recipe, predictions & I1 removes fit rows equal to a held-out row vs.\ P1 (as many random rows); I4 refits preprocessing on fit rows vs.\ P5 (drop a random predictor); fires if $|\Delta_{\mathrm{corr}}|>|\Delta_{\mathrm{placebo}}|$ & weak everywhere (Figure~\ref{fig:paired})\\
+Targeted refit & recipe, predictions & loss on the 16 evaluation rows nearest the fit set; nearest-row removal; scaler refit vs.\ scope-row placebo; top-predictor removal vs.\ random predictor; each against 19 placebos ($z$) & exact copies and proxies alone; adds nothing to structure\\
+Guarded refit & recipe, predictions & $B=L_{\mathrm{guarded}}-L_{\mathrm{suspected}}$ with preprocessing refitted on fit rows (hidden scope) & weak trace of supervised selection; none of scaling\\
+C2ST & values, partitions & out-of-fold AUROC of a classifier separating fit from evaluation rows & poor copy detector (copies make the sets alike)\\
+\bottomrule
+\end{tabular}

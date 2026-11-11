@@ -1,0 +1,76 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+# Upstream `leakage-analysis` (Yang, Brower-Sinning, Lewis, Kästner; ASE 2022) built
+# from its own Dockerfile recipe at a pinned commit, with Soufflé inside.
+# Prompt 8B-8D uses this image only as the reproducibility cross-check for
+# the LeakageDetector 2.0 native bundle (same algorithm, different front-end);
+# see docs/phase9_environment.md. The pinned commit is recorded again in
+# configs/phase9/static_tools.yaml and must match LEAKAGE_ANALYSIS_COMMIT.
+#
+# Build (login node, network required, ~20-40 min):
+#   apptainer build --fakeroot tools/containers/leakage_analysis.sif \
+#       containers/leakage_analysis.def
+# Run (mirrors the upstream ENTRYPOINT `python3 -m src.main <file.py> -o`):
+#   apptainer exec --cleanenv --bind <workdir>:/work --pwd /opt/leakage-analysis \
+#       tools/containers/leakage_analysis.sif python3 -m src.main /work/pipeline.py -o
+
+%arguments
+    LEAKAGE_ANALYSIS_COMMIT=a7d038bfec6b8ddbe21d87dde54b806aecdd79f7
+
+%post
+    set -eu
+    export DEBIAN_FRONTEND=noninteractive
+    # The build runs in an unprivileged fakeroot namespace. Dropping to _apt
+    # cannot access the compute-node temporary directory bound into the build.
+    echo 'APT::Sandbox::User "root";' > /etc/apt/apt.conf.d/99fakeroot
+    apt-get update
+    apt-get install -y --no-install-recommends \
+        ca-certificates curl gnupg git \
+        build-essential nodejs npm
+    # Soufflé stable PPA, as in the upstream Dockerfile.
+    curl -fsSL https://souffle-lang.github.io/ppa/souffle-key.public \
+        | gpg --dearmor -o /usr/share/keyrings/souffle.gpg
+    echo "deb [signed-by=/usr/share/keyrings/souffle.gpg] https://souffle-lang.github.io/ppa/ubuntu/ stable main" \
+        > /etc/apt/sources.list.d/souffle.list
+    # Python 3.8 from deadsnakes. The key and list are written directly so
+    # software-properties-common (dbus/polkit) is not pulled in; that stack
+    # fails to configure under Apptainer --fakeroot on the cluster.
+    curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xF23C5A6CF475977595C89F51BA6932366A755776" \
+        | gpg --dearmor -o /usr/share/keyrings/deadsnakes.gpg
+    echo "deb [signed-by=/usr/share/keyrings/deadsnakes.gpg] http://ppa.launchpad.net/deadsnakes/ppa/ubuntu jammy main" \
+        > /etc/apt/sources.list.d/deadsnakes.list
+    apt-get update
+    apt-get install -y --no-install-recommends souffle python3.8 python3.8-venv python3.8-dev
+    rm -rf /var/lib/apt/lists/*
+
+    git clone https://github.com/malusamayo/leakage-analysis /opt/leakage-analysis
+    cd /opt/leakage-analysis
+    git checkout {{ LEAKAGE_ANALYSIS_COMMIT }}
+    git submodule update --init --recursive
+    git rev-parse HEAD > /opt/leakage-analysis/.pinned_commit
+
+    npm install -g lerna@4.0.0
+    cd /opt/leakage-analysis/pyright
+    npm install
+    cd /opt/leakage-analysis/pyright/packages/pyright
+    npm run build
+
+    python3.8 -m venv /venv
+    /venv/bin/pip install --no-cache-dir --upgrade pip
+    /venv/bin/pip install --no-cache-dir -r /opt/leakage-analysis/requirements.txt
+    mkdir -p /work
+
+%environment
+    export PATH=/venv/bin:/usr/local/bin:/usr/bin:/bin
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+    export PYTHONDONTWRITEBYTECODE=1
+
+%labels
+    org.leakagelens.purpose "upstream leakage-analysis cross-check"
+    org.leakagelens.upstream_commit "{{ LEAKAGE_ANALYSIS_COMMIT }}"
+
+%runscript
+    cd /opt/leakage-analysis
+    exec python3 -m src.main "$@"

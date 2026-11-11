@@ -1,0 +1,10 @@
+\begin{tabular}{lrrr}\toprule
+Deduplicated tables (630 episodes) & TPR at FPR $=0$ & TPR at rule FPR (0.16) & 95\% CI\\\midrule
+simple rule, LOFO & --- & 0.62 & [0.55, 0.70]\\
+exact $\lor$ \texttt{scope\_eval\_frac} $>0$ & 0.38 & --- & \\
+learned structural, frozen (oracle) & 0.29 & 0.60 & [0.30, 0.83]\\
+learned structural, corrected (oracle) & 0.30 & 0.61 & [0.30, 0.82]\\
+learned structural, corrected, dd-trained (oracle) & 0.34 & 0.69 & [0.39, 0.82]\\
+\midrule rule $-$ learned (frozen) & +0.10 & +0.02 & [-0.15, 0.27]\\
+rule $-$ learned (corrected) & +0.08 & +0.03 & [-0.12, 0.28]\\
+\bottomrule\end{tabular}

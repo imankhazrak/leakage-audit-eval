@@ -1,0 +1,168 @@
+{
+ "n_episodes": 1380,
+ "source": "saved out-of-fold predictions; no fit",
+ "replay": {
+  "flags_by_arm": {
+   "PL5m": {
+    "n": 60,
+    "flags": 2,
+    "flags_dd": 0,
+    "flags_raw": 2
+   },
+   "NL5X": {
+    "n": 60,
+    "flags": 7,
+    "flags_dd": 4,
+    "flags_raw": 3
+   },
+   "NL5S": {
+    "n": 60,
+    "flags": 2,
+    "flags_dd": 1,
+    "flags_raw": 1
+   },
+   "NL5N": {
+    "n": 60,
+    "flags": 6,
+    "flags_dd": 3,
+    "flags_raw": 3
+   },
+   "A": {
+    "n": 60,
+    "flags": 8,
+    "flags_dd": 3,
+    "flags_raw": 5
+   },
+   "PL5a80": {
+    "n": 60,
+    "flags": 4,
+    "flags_dd": 3,
+    "flags_raw": 1
+   },
+   "PL5a95": {
+    "n": 60,
+    "flags": 12,
+    "flags_dd": 7,
+    "flags_raw": 5
+   },
+   "PL5a995": {
+    "n": 60,
+    "flags": 27,
+    "flags_dd": 17,
+    "flags_raw": 10
+   }
+  },
+  "PL5m_vs_NL5X": {
+   "per_family_AUROC": {
+    "openml_1067": 0.6111111111111112,
+    "openml_1462": 0.19444444444444445,
+    "openml_1464": 0.7777777777777778,
+    "openml_1487": 0.8333333333333334,
+    "openml_1489": 0.5,
+    "openml_1494": 0.5,
+    "openml_44": 0.9444444444444444,
+    "uci_159": 0.0,
+    "uci_329": 0.6666666666666666,
+    "uci_563": 0.5277777777777778
+   },
+   "mean": 0.5555555555555556,
+   "t95": [
+    0.3505423797744147,
+    0.7605687313366964
+   ],
+   "families_above_0.5": 6,
+   "families_at_0.5": 2,
+   "families_below_0.5": 2,
+   "sign_flip_p_vs_0.5": 0.578125
+  },
+  "overall": {
+   "FPR": 0.09259259259259259,
+   "TPR": 0.3678571428571429
+  }
+ },
+ "corrected": {
+  "flags_by_arm": {
+   "PL5m": {
+    "n": 60,
+    "flags": 2,
+    "flags_dd": 0,
+    "flags_raw": 2
+   },
+   "NL5X": {
+    "n": 60,
+    "flags": 7,
+    "flags_dd": 4,
+    "flags_raw": 3
+   },
+   "NL5S": {
+    "n": 60,
+    "flags": 2,
+    "flags_dd": 1,
+    "flags_raw": 1
+   },
+   "NL5N": {
+    "n": 60,
+    "flags": 6,
+    "flags_dd": 3,
+    "flags_raw": 3
+   },
+   "A": {
+    "n": 60,
+    "flags": 8,
+    "flags_dd": 3,
+    "flags_raw": 5
+   },
+   "PL5a80": {
+    "n": 60,
+    "flags": 4,
+    "flags_dd": 3,
+    "flags_raw": 1
+   },
+   "PL5a95": {
+    "n": 60,
+    "flags": 10,
+    "flags_dd": 6,
+    "flags_raw": 4
+   },
+   "PL5a995": {
+    "n": 60,
+    "flags": 23,
+    "flags_dd": 15,
+    "flags_raw": 8
+   }
+  },
+  "PL5m_vs_NL5X": {
+   "per_family_AUROC": {
+    "openml_1067": 0.6388888888888888,
+    "openml_1462": 0.2222222222222222,
+    "openml_1464": 0.75,
+    "openml_1487": 0.8611111111111112,
+    "openml_1489": 0.5,
+    "openml_1494": 0.4722222222222222,
+    "openml_44": 0.9444444444444444,
+    "uci_159": 0.0,
+    "uci_329": 0.6666666666666666,
+    "uci_563": 0.5
+   },
+   "mean": 0.5555555555555556,
+   "t95": [
+    0.3511853918416359,
+    0.7599257192694753
+   ],
+   "families_above_0.5": 5,
+   "families_at_0.5": 2,
+   "families_below_0.5": 3,
+   "sign_flip_p_vs_0.5": 0.5703125
+  },
+  "overall": {
+   "FPR": 0.09259259259259259,
+   "TPR": 0.3523809523809524
+  }
+ },
+ "median_assoc_top": {
+  "A": 0.5695666149859283,
+  "NL5X": 0.5611313649122832,
+  "NL5S": 0.5695666149859283,
+  "PL5m": 0.5723409533045497
+ }
+}
